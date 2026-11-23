@@ -1,0 +1,115 @@
+@media print {
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 10pt !important;
+        margin: 0 !important;
+        padding: 10mm !important;
+    }
+
+    .site-header,
+    .nav-bar-container,
+    .shortcuts-panel,
+    .site-footer,
+    .no-print,
+    .btn,
+    .search-box {
+        display: none !important;
+    }
+
+    .site-wrapper {
+        display: block;
+        min-height: 0;
+    }
+
+    .main-content {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .stat-plata-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin-top: 15px !important;
+    }
+
+    .stat-plata-table th,
+    .stat-plata-table td {
+        border: 1px solid #000000 !important;
+        padding: 6px 8px !important;
+        font-size: 9.5pt !important;
+        text-align: left;
+    }
+
+    .stat-plata-table th {
+        background-color: #e5e5e5 !important;
+        color: #111111 !important;
+        font-weight: bold !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .stat-plata-footer td {
+        background-color: #d1d5db !important;
+        font-weight: bold !important;
+        border-top: 2px solid #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .fluturasi-container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px !important;
+        page-break-inside: auto;
+    }
+
+    .fluturas-card {
+        border: 2px dashed #000000 !important;
+        padding: 12px !important;
+        margin-bottom: 15px !important;
+        page-break-inside: avoid !important;
+        background-color: #ffffff !important;
+    }
+
+    .fluturas-header {
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        border-bottom: 1px solid #000000 !important;
+        padding-bottom: 4px !important;
+        margin-bottom: 8px !important;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .fluturas-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px 14px !important;
+        font-size: 9pt !important;
+    }
+
+    .fluturas-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        border-bottom: 1px dotted #ccc !important;
+        padding: 2px 0 !important;
+    }
+
+    .fluturas-row.highlight {
+        font-weight: bold !important;
+        background-color: #f3f4f6 !important;
+        border-bottom: 1px solid #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

@@ -1,0 +1,5 @@
+<connectionStrings>
+  <add name="OracleConnection"
+       connectionString="Data Source=localhost:1521/XEPDB1;User ID=TI_SALARII;Password=INLOCUIESTE_PAROLA;"
+       providerName="Oracle.ManagedDataAccess.Client" />
+</connectionStrings>

@@ -1,0 +1,121 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SalariiApp.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="ro">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Gestiune Salarii</title>
+
+    <link href="~/Content/site.css?v=rose2" rel="stylesheet" type="text/css" />
+    <link href="~/Content/print.css" rel="stylesheet" type="text/css" media="print" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="mainForm" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
+
+        <div class="site-wrapper">
+            <header class="site-header">
+                <div class="header-container">
+                    <div class="header-title-box">
+                        <h1 class="header-main-title">PROIECT ASP.NET APLICATIE SALARIZARE</h1>
+                    </div>
+
+                    <div class="header-widgets">
+                        <asp:UpdatePanel ID="upClock" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="ajax-clock-panel">
+                                    <div class="ajax-clock-label">Timp Server (AJAX):</div>
+                                    <div class="ajax-clock-time">
+                                        <asp:Label ID="lblServerTime" runat="server" />
+                                    </div>
+                                    <div class="ajax-clock-date">
+                                        <asp:Label ID="lblServerDate" runat="server" />
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="timerClock" EventName="Tick" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+                        <asp:Timer ID="timerClock" runat="server" Interval="1000" OnTick="timerClock_Tick" />
+
+                        <asp:UpdatePanel ID="upBanner" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="ajax-banner-container">
+                                    <asp:Image ID="imgAdBanner" runat="server" ImageUrl="~/Images/banner1.jpg"
+                                        CssClass="promo-image" GenerateEmptyAlternateText="true" />
+                                    <div class="promo-copy">
+                                        <span class="promo-label">Promo</span>
+                                        <asp:Label ID="lblPromoTitle" runat="server" CssClass="promo-title" />
+                                        <asp:Label ID="lblPromoDescription" runat="server" CssClass="promo-description" />
+                                    </div>
+                                    <span class="promo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="timerBanner" EventName="Tick" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+                        <asp:Timer ID="timerBanner" runat="server" Interval="4000" OnTick="timerBanner_Tick" />
+                    </div>
+                </div>
+            </header>
+
+            <nav class="nav-bar-container">
+                <div class="nav-bar-content">
+                    <asp:Menu ID="MainMenu" runat="server" 
+                              Orientation="Horizontal" 
+                              CssClass="custom-asp-menu"
+                              StaticDisplayLevels="1" 
+                              MaximumDynamicDisplayLevels="2"
+                              StaticSubMenuIndent="10px">
+                        <Items>
+                            <asp:MenuItem Text="HOME" Value="HOME" NavigateUrl="~/Default.aspx" />
+                            <asp:MenuItem Text="INTRODUCERE DATE" Value="INTRODUCERE">
+                                <asp:MenuItem Text="Actualizare date" Value="ACTUALIZARE" NavigateUrl="~/ActualizareDate.aspx" />
+                                <asp:MenuItem Text="Adaugare angajati" Value="ADAUGARE" NavigateUrl="~/AdaugareAngajat.aspx" />
+                                <asp:MenuItem Text="Stergere angajati" Value="STERGERE" NavigateUrl="~/StergereAngajat.aspx" />
+                                <asp:MenuItem Text="Calcul salarii" Value="CALCUL" NavigateUrl="~/CalculSalarii.aspx" />
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="TIPARIRE" Value="TIPARIRE">
+                                <asp:MenuItem Text="Stat plata" Value="STAT_PLATA" NavigateUrl="~/StatPlata.aspx" />
+                                <asp:MenuItem Text="Fluturasi" Value="FLUTURASI" NavigateUrl="~/Fluturasi.aspx" />
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="MODIF_PROCENTE" Value="PROCENTE" NavigateUrl="~/ModifProcente.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </div>
+            </nav>
+
+            <asp:Panel ID="pnlShortcuts" runat="server" CssClass="shortcuts-panel">
+                <div class="shortcuts-content">
+                    <span class="shortcuts-label">Comenzi rapide (Panel):</span>
+                    <a href="<%= ResolveUrl("~/Default.aspx") %>" class="btn-shortcut">Home</a>
+                    <a href="<%= ResolveUrl("~/ActualizareDate.aspx") %>" class="btn-shortcut">Actualizare date</a>
+                    <a href="<%= ResolveUrl("~/AdaugareAngajat.aspx") %>" class="btn-shortcut">Adaugare angajati</a>
+                    <a href="<%= ResolveUrl("~/StergereAngajat.aspx") %>" class="btn-shortcut">Stergere angajati</a>
+                    <a href="<%= ResolveUrl("~/CalculSalarii.aspx") %>" class="btn-shortcut">Calcul salarii</a>
+                    <a href="<%= ResolveUrl("~/StatPlata.aspx") %>" class="btn-shortcut">Stat plata</a>
+                    <a href="<%= ResolveUrl("~/Fluturasi.aspx") %>" class="btn-shortcut">Fluturasi</a>
+                    <a href="<%= ResolveUrl("~/ModifProcente.aspx") %>" class="btn-shortcut">Modificare procente</a>
+                </div>
+            </asp:Panel>
+
+            <main class="main-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+
+            <footer class="site-footer">
+                <p>&copy; <%: DateTime.Now.Year %> - Proiect ASP.NET Aplicatie Salarizare</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>

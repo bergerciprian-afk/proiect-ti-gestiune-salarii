@@ -1,0 +1,641 @@
+/* ==========================================================================
+   PROIECT ASP.NET - GESTIUNE SALARII
+   Design orientativ conform cerintelor de examen (Figura 1)
+   Fara elemente pompoase, interfata curata, clasica, academica.
+   ========================================================================== */
+
+:root {
+    --rose-ink: #51263c;
+    --rose-muted: #6b4157;
+    --rose-link: #823459;
+    --rose-bg: #fcf1f7;
+    --rose-soft: #f9e3ee;
+    --rose-panel: #f4c9de;
+    --rose-accent: #eaa9c7;
+    --rose-active: #e193b8;
+    --rose-border: #d18eae;
+    --rose-control-border: #9b5c7b;
+    --rose-focus: #914268;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--rose-bg);
+    color: #222222;
+    line-height: 1.45;
+    font-size: 14px;
+}
+
+a {
+    color: var(--rose-link);
+}
+
+a:where(:hover, :focus-visible) {
+    color: var(--rose-ink);
+}
+
+.site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   1. HEADER CONFORM FIGURA 1
+   -------------------------------------------------------------------------- */
+.site-header {
+    background: linear-gradient(115deg, var(--rose-panel), var(--rose-accent));
+    color: var(--rose-ink);
+    border-bottom: 1px solid var(--rose-border);
+    padding: 10px 20px;
+}
+
+.header-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-title-box {
+    flex: 1;
+    min-width: min(320px, 100%);
+}
+
+.header-main-title {
+    font-size: 1.22rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--rose-ink);
+    text-transform: uppercase;
+}
+
+.header-widgets {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    min-width: 0;
+}
+
+.header-widgets > [id$="_upBanner"] {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.ajax-clock-panel {
+    background-color: var(--rose-soft);
+    border: 1px solid var(--rose-border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-align: right;
+    min-width: 190px;
+    color: var(--rose-ink);
+}
+
+.ajax-clock-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--rose-muted);
+    font-weight: 600;
+}
+
+.ajax-clock-time {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--rose-ink);
+    font-family: 'Consolas', 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.ajax-clock-date {
+    font-size: 0.76rem;
+    color: var(--rose-muted);
+}
+
+.ajax-banner-container {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    align-items: center;
+    gap: 12px;
+    width: min(390px, calc(100vw - 40px));
+    min-height: 87px;
+    padding: 11px 14px;
+    overflow: hidden;
+    background: var(--rose-panel);
+    border: 1px solid var(--rose-border);
+    border-radius: 11px;
+    box-shadow: 0 5px 16px rgb(81 38 60 / 12%);
+}
+
+.ajax-banner-container .promo-image,
+.ajax-banner-container::after {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.promo-image {
+    object-fit: cover;
+    object-position: left center;
+    filter: blur(15px);
+    transform: scale(1.18);
+    opacity: .35;
+    z-index: -2;
+}
+
+.ajax-banner-container::after {
+    content: "";
+    background: linear-gradient(100deg, var(--rose-soft) 25%, rgb(244 201 222 / 96%) 64%, rgb(234 169 199 / 86%));
+    z-index: -1;
+}
+
+.promo-copy {
+    min-width: 0;
+    display: grid;
+    justify-items: start;
+    gap: 3px;
+}
+
+.promo-label {
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #684408;
+    background: #f8e9bf;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.promo-title {
+    color: var(--rose-ink);
+    font-size: clamp(.9rem, 2.4vw, 1.03rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.promo-description {
+    color: var(--rose-muted);
+    font-size: .74rem;
+    line-height: 1.3;
+}
+
+.promo-mark {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 3px;
+    padding: 9px 6px;
+    width: 39px;
+    height: 39px;
+    background: rgb(255 255 255 / 50%);
+    border: 1px solid var(--rose-border);
+    border-radius: 9px;
+}
+
+.promo-mark i {
+    width: 4px;
+    height: 7px;
+    background: #a64e78;
+    border-radius: 2px;
+}
+
+.promo-mark i:nth-child(2) { height: 12px; }
+.promo-mark i:nth-child(3) { height: 17px; background: #ad7825; }
+
+/* --------------------------------------------------------------------------
+   2. BARA DE MENIURI (ASP:MENU)
+   -------------------------------------------------------------------------- */
+.nav-bar-container {
+    background-color: var(--rose-accent);
+    border-bottom: 1px solid var(--rose-border);
+}
+
+.nav-bar-content {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.custom-asp-menu {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.custom-asp-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.custom-asp-menu a {
+    color: var(--rose-ink) !important;
+    text-decoration: none;
+    padding: 9px 16px;
+    display: block;
+    transition: background 0.15s ease;
+    border-right: 1px solid var(--rose-border);
+}
+
+.custom-asp-menu a:hover,
+.custom-asp-menu .selected {
+    background-color: var(--rose-active);
+    color: var(--rose-ink) !important;
+}
+
+/* Submeniu pop-up */
+.custom-asp-menu table {
+    border-collapse: collapse;
+}
+
+.custom-asp-menu .dynamic {
+    background-color: var(--rose-soft) !important;
+    border: 1px solid var(--rose-border) !important;
+    box-shadow: 0 3px 6px rgb(81 38 60 / 16%) !important;
+}
+
+.custom-asp-menu .dynamic a {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rose-border);
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. PANEL BUTOANE CALDE (SHORTCUT) - CERINTA OPTIONALA
+   -------------------------------------------------------------------------- */
+.shortcuts-panel {
+    background-color: var(--rose-soft);
+    border-bottom: 1px solid var(--rose-border);
+    padding: 6px 15px;
+}
+
+.shortcuts-content {
+    max-width: 1250px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.shortcuts-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--rose-ink);
+    margin-right: 4px;
+}
+
+.btn-shortcut {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #ffffff;
+    color: var(--rose-ink);
+    border: 1px solid var(--rose-border);
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-shortcut:hover {
+    background-color: var(--rose-accent);
+    color: var(--rose-ink);
+    border-color: var(--rose-control-border);
+}
+
+/* --------------------------------------------------------------------------
+   4. ZONA CONTINUT PRINCIPAL
+   -------------------------------------------------------------------------- */
+.main-content {
+    flex: 1;
+    max-width: 1250px;
+    width: 100%;
+    margin: 15px auto;
+    padding: 0 15px;
+}
+
+.page-header {
+    margin-bottom: 15px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--rose-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    font-size: 1.35rem;
+    color: var(--rose-ink);
+    font-weight: 700;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid var(--rose-border);
+    border-radius: 3px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   5. FORMULARE SI CONTROALE EDITABILE
+   -------------------------------------------------------------------------- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #333333;
+}
+
+.form-control {
+    padding: 7px 10px;
+    border: 1px solid var(--rose-control-border);
+    border-radius: 3px;
+    font-size: 0.9rem;
+    color: #222222;
+    background-color: #ffffff;
+}
+
+.form-control:focus {
+    border-color: var(--rose-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--rose-accent);
+}
+
+/* CAMPURILE CALCULATE PE FUNDAL GALBEN (CERINTA EXPLICITA) */
+.form-control[readonly],
+input[readonly].form-control,
+.col-calc {
+    background-color: #ffff99 !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+/* Butoane standard */
+.btn {
+    display: inline-block;
+    padding: 7px 15px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--rose-accent);
+    color: var(--rose-ink);
+    border-color: var(--rose-control-border);
+}
+
+.btn-primary:hover {
+    background-color: var(--rose-active);
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    color: #ffffff;
+    border-color: #1b5e20;
+}
+
+.btn-success:hover {
+    background-color: #236526;
+}
+
+.btn-danger {
+    background-color: #c62828;
+    color: #ffffff;
+    border-color: #8e0000;
+}
+
+.btn-danger:hover {
+    background-color: #a31c1c;
+}
+
+.btn-outline {
+    background-color: #ffffff;
+    border-color: var(--rose-control-border);
+    color: var(--rose-ink);
+}
+
+.btn-outline:hover {
+    background-color: var(--rose-soft);
+}
+
+/* --------------------------------------------------------------------------
+   6. TABELE SI GRIDVIEW
+   -------------------------------------------------------------------------- */
+.custom-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.86rem;
+    background-color: #ffffff;
+    border: 1px solid var(--rose-border);
+}
+
+.custom-grid th {
+    background-color: var(--rose-accent);
+    color: var(--rose-ink);
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 700;
+    border: 1px solid var(--rose-border);
+    white-space: nowrap;
+}
+
+.custom-grid td {
+    padding: 7px 10px;
+    border: 1px solid var(--rose-border);
+    color: #222222;
+}
+
+.custom-grid tr:nth-child(even) {
+    background-color: var(--rose-bg);
+}
+
+.custom-grid tr:hover {
+    background-color: var(--rose-soft);
+}
+
+.custom-grid-footer td {
+    background-color: var(--rose-panel) !important;
+    color: var(--rose-ink) !important;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: 1px solid var(--rose-border);
+}
+
+/* --------------------------------------------------------------------------
+   7. STAT DE PLATA (Tabel A3 Landscape)
+   -------------------------------------------------------------------------- */
+.stat-plata-sheet {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid var(--rose-border);
+    margin-bottom: 20px;
+}
+
+.sheet-title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--rose-ink);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.sheet-subtitle {
+    text-align: center;
+    font-size: 0.88rem;
+    color: #444444;
+    margin-bottom: 16px;
+}
+
+.stat-plata-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.85rem;
+}
+
+.stat-plata-table th,
+.stat-plata-table td {
+    border: 1px solid #a0b0c0;
+    padding: 6px 8px;
+}
+
+.stat-plata-table th {
+    background-color: var(--rose-accent);
+    color: var(--rose-ink);
+    font-weight: 700;
+    text-align: center;
+}
+
+.stat-plata-footer td {
+    background-color: var(--rose-soft);
+    font-weight: 700;
+    border-top: 2px solid var(--rose-border);
+}
+
+/* --------------------------------------------------------------------------
+   8. FLUTURASI SALARII (Pe doua coloane conform cerintei 4.b)
+   -------------------------------------------------------------------------- */
+.fluturasi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.fluturas-item {
+    background-color: #ffffff;
+    border: 2px dashed #708090;
+    padding: 14px 16px;
+}
+
+.fluturas-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--rose-border);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: var(--rose-ink);
+}
+
+.fluturas-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    font-size: 0.85rem;
+}
+
+.fluturas-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.fluturas-row-highlight {
+    background-color: #ffff99;
+    font-weight: 700;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    padding: 3px 5px;
+    margin-top: 5px;
+}
+
+/* --------------------------------------------------------------------------
+   9. MESAJE DE ALERTA
+   -------------------------------------------------------------------------- */
+.alert {
+    padding: 10px 14px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+}
+
+.alert-danger {
+    background-color: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #ef9a9a;
+}
+
+.alert-info {
+    background-color: var(--rose-soft);
+    color: var(--rose-ink);
+    border: 1px solid var(--rose-border);
+}
+
+/* --------------------------------------------------------------------------
+   10. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+    background-color: var(--rose-panel);
+    color: var(--rose-muted);
+    padding: 12px 20px;
+    font-size: 0.82rem;
+    text-align: center;
+    border-top: 1px solid var(--rose-border);
+    margin-top: auto;
+}
